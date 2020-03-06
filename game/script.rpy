@@ -9,7 +9,7 @@ screen key_item:
         xalign 0.94
         yalign 0.66
         focus_mask True
-        action [Call("ключ_в_рюкзак"), renpy.restart_interaction]
+        action Call("ключ_в_рюкзак")
         hovered Notify(_("hovered"))
 
 screen knapsak:
@@ -27,7 +27,6 @@ transform rightcenter:
     yalign 0.65
 
 init python:
-    # empty item list
     items = [("башмаки", "Надели башмаки"), ("шляпа", "Надели шляпу")]
 
 # Игра начинается здесь:
@@ -44,11 +43,7 @@ label start:
 
 label ключ_в_рюкзак:
     hide screen key_item
-    # hide screen knapsak
     python:
         items.append(("ключ", "Ключ применен"))
-        # а это чтобы перерисовать/обновить экраны:
-        #renpy.restart_interaction()
-    # show screen knapsak
     "Отлично! Ключ у тебя в кармане."
     return
