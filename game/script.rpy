@@ -1,7 +1,7 @@
 ﻿image goldenkey:
     "key.png"
     zoom 0.05
-    rotate 185
+    rotate 186
 
 screen key_item:
     imagebutton:
