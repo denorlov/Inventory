@@ -1,43 +1,4 @@
-﻿default speed = 10
-
-screen volume_controls():
-    frame:
-        hbox:
-            bar:
-                value VariableValue("speed", 100, 1.0)
-                changed Jump("start")
-                xalign 0.5
-                ypos 50
-                xsize 500
-                style "slider"
-            text "speed: [speed]":
-                yalign 0.5
-            textbutton "redraw":
-                yalign 0.5
-                action Jump("start")
-
-
-image big = "Big.png"
-image sno1 = "snow1.png"
-image sno2 = "snow2.png"
-image sno3 = "snow3.png"
-
-transform snow1:
-    xalign 0.0 yalign 0.0
-    linear speed + 5.5 yalign 1.0
-    repeat
-
-transform snow2:
-    xalign 0.0 yalign 0.0
-    linear speed + 6.5 yalign 1.0
-    repeat
-
-transform snow3:
-    xalign 0.0 yalign 0.0
-    linear speed + 7.5 yalign 1.0
-    repeat
-
-image goldenkey:
+﻿image goldenkey:
     "key.png"
     zoom 0.05
     rotate 185
@@ -70,19 +31,6 @@ init python:
 
 # Игра начинается здесь:
 label start:
-    show big
-    show sno3 at snow3
-    show sno2 at snow2
-    show sno1 at snow1
-
-    show screen volume_controls
-
-    window hide
-
-    "speed: [speed]"
-
-    window hide
-
     scene bg swamp
 
     show screen knapsak
