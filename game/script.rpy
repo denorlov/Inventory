@@ -35,7 +35,6 @@ label start:
 
     show screen knapsak
     show screen key_item
-#    show goldenkey at rightcenter
 
     "Где-то на картинке спрятан ключ. Положи его скорей в карман"
 
