@@ -1,53 +1,21 @@
-﻿image goldenkey:
-    "key.png"
-    zoom 0.05
-    rotate 186
-
-image hat:
-    "hat.png"
-    zoom 0.1
-
-image ring:
-    "ring.png"
-    zoom 0.1
+﻿init python:
+    items = [
+        ("шляпа", "Надели шляпу", "hat", "audio/click.wav"),
+        ("кольцо", "Надели кольцо", "ring", "audio/click.wav"),
+    ]
 
 screen key_item:
-    imagebutton:
-        idle "goldenkey"
-        xalign 0.94
+    vbox:
+        xalign 0.93
         yalign 0.66
-        focus_mask True
-        activate_sound "audio/get-key.mp3"
-        action Call("ключ_в_рюкзак")
-        hovered Notify(_("hovered"))
 
-screen knapsak:
-    frame:
-        xpadding 10
-        ypadding 10
-
-        xalign 0.01
-        yalign 0.2
-
-        vbox:
-            for item in items:
-                vbox:
-                    xalign 0.5
-                    imagebutton:
-                        activate_sound item[3]
-                        xalign 0.5
-                        idle item[2]
-                        action Notify(_(item[1]))
-                    textbutton item[0]:
-                        xalign 0.5
-                        action Notify(_(item[1]))
-
-transform rightcenter:
-    xalign 0.95
-    yalign 0.65
-
-init python:
-    items = [("шляпа", "Надели шляпу", "hat", "audio/click.wav"), ("кольцо", "Надели кольцо", "ring", "audio/click.wav")]
+        imagebutton:
+            idle "key_small"
+            xalign 0.94
+            yalign 0.66
+            focus_mask True
+            activate_sound "audio/get-key.mp3"
+            action Call("ключ_в_рюкзак")
 
 # Игра начинается здесь:
 label start:
@@ -55,16 +23,27 @@ label start:
 
     scene bg swamp
 
-    show screen knapsak
+    show screen knapsak_icon
     show screen key_item
 
     "Где-то на картинке спрятан ключ. Положи его скорей в карман"
 
+    pause
     return
+
+label ключ_применен:
+    python:
+        items.remove(("ключ", "ключ_применен", "key_small", "audio/click.wav"))
+    show screen knapsak
+    show screen key_item
+    "Положил ключ на место, молодец, хороший Хоббит."
+    return
+
 
 label ключ_в_рюкзак:
     hide screen key_item
     python:
-        items.append(("ключ", "Ключ применен", "goldenkey", "audio/click.wav"))
+        items.append(("ключ", "ключ_применен", "key_small", "audio/click.wav"))
+    show screen knapsak
     "Отлично! Ключ у тебя в кармане."
     return
