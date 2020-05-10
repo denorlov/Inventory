@@ -61,25 +61,31 @@ screen knapsak:
         xalign 0.5
         yalign 0.1
 
+        # x, y, width, height
+        # might be in float (relative) and in int (absolute)
         drag_handle (0.0, 0.0, 1.0, 1.0)
 
         frame:
             xpadding 10
             ypadding 10
 
-            vbox:
-                hbox:
-                    for item in items:
+            hbox:
+                for item in items:
+                    vbox:
                         imagebutton:
                             xminimum 70
                             yminimum 70
+                            xalign 0.5
+                            yalign 0.5
 
                             activate_sound item[3]
                             idle item[2]
-                            hovered Notify(_(item[0]))
                             action Call(item[1])
 
-                    textbutton "X":
-                        xalign 1.0
-                        action [Hide("knapsak"), Return()]
+                        textbutton item[0]:
+                            xalign 0.5
+                            yalign 0.5
 
+                textbutton "X":
+                    action [Hide("knapsak"), Return()]
+                    xalign 1.0
